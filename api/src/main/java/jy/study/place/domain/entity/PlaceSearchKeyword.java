@@ -1,5 +1,6 @@
 package jy.study.place.domain.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 @Table(name = "place_search_keyword")
 @EqualsAndHashCode(of = "keyword")
 @NoArgsConstructor
+@AllArgsConstructor
 public class PlaceSearchKeyword {
 
     @Id
