@@ -1,6 +1,6 @@
 package jy.study;
 
-import jy.study.place.domain.PlaceSearchKeyword;
+import jy.study.place.domain.entity.PlaceSearchKeyword;
 import jy.study.place.infra.repository.PlaceSearchKeywordRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package jy.study.place.domain;
+package jy.study.place.domain.entity;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
