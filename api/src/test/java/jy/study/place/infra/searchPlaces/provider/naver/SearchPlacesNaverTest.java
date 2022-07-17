@@ -1,4 +1,4 @@
-package jy.study.place.infra.searchPlaces.provider.kakao;
+package jy.study.place.infra.searchPlaces.provider.naver;
 
 import jy.study.place.infra.searchPlaces.provider.SearchPlace;
 import org.junit.jupiter.api.DisplayName;
@@ -11,20 +11,20 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class SearchPlacesKakaoTest {
+class SearchPlacesNaverTest {
 
     @Autowired
-    SearchPlacesKakao searchPlacesKakao;
+    SearchPlacesNaver searchPlacesNaver;
 
     @Test
-    @DisplayName("카카오 API로 장소 조회")
+    @DisplayName("네이버 API로 장소 조회")
     void search() {
         //given
         String keyword = "곱창";
         int size = 5;
 
         //when
-        List<? extends SearchPlace> searchPlaces = searchPlacesKakao.search(keyword, size);
+        List<? extends SearchPlace> searchPlaces = searchPlacesNaver.search(keyword, size);
 
         //then
         assertNotNull(searchPlaces);

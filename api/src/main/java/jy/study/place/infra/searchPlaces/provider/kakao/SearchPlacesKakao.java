@@ -38,14 +38,14 @@ public class SearchPlacesKakao implements SearchPlacesProvider {
 
         try {
             HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-            SearchPlacesDto searchPlacesDto = objectMapper.readValue(response.body(), SearchPlacesDto.class);
-            return searchPlacesDto.getDocuments();
+            SearchPlacesKaKaoResult result = objectMapper.readValue(response.body(), SearchPlacesKaKaoResult.class);
+            return result.getDocuments();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        return new ArrayList<>();
+        return new ArrayList<>(0);
     }
 }

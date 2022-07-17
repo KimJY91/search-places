@@ -9,7 +9,7 @@ import java.util.List;
  * https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-keyword 참고
  */
 @Getter
-public class SearchPlacesDto {
+public class SearchPlacesKaKaoResult {
 
     @Getter
     public static class Document extends SearchPlace {
