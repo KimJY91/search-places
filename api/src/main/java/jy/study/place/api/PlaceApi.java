@@ -7,11 +7,13 @@ import jy.study.place.dto.PlaceDto;
 import jy.study.place.dto.PlaceSearchKeywordDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RequestMapping("/places")
 @RestController
 @RequiredArgsConstructor
 public class PlaceApi {
@@ -25,7 +27,7 @@ public class PlaceApi {
      * @param keyword 키워드
      * @return 장소 리스트
      */
-    @GetMapping("/places")
+    @GetMapping
     public CommonResponse<List<PlaceDto>> searchPlaces(@RequestParam String keyword) {
         return new CommonResponse<>(searchPlacesService.search(keyword));
     }
