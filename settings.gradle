@@ -1,3 +1,4 @@
 rootProject.name = 'search-places'
 include 'api'
+include 'discovery-service'
 
