@@ -1,6 +1,7 @@
-package jy.study.place.infra.searchPlaces.provider.kakao;
+package jy.study.place.infra.searchPlaces.kakao;
 
-import jy.study.place.infra.searchPlaces.provider.SearchPlace;
+import jy.study.place.domain.entity.Place;
+import jy.study.place.infra.searchPlaces.kakao.SearchPlacesKakao;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ class SearchPlacesKakaoTest {
         int size = 5;
 
         //when
-        List<? extends SearchPlace> searchPlaces = searchPlacesKakao.search(keyword, size);
+        List<Place> searchPlaces = searchPlacesKakao.search(keyword, size);
 
         //then
         assertNotNull(searchPlaces);

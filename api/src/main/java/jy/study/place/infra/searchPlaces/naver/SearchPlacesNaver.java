@@ -1,8 +1,8 @@
-package jy.study.place.infra.searchPlaces.provider.naver;
+package jy.study.place.infra.searchPlaces.naver;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jy.study.place.infra.searchPlaces.provider.SearchPlace;
-import jy.study.place.infra.searchPlaces.provider.SearchPlacesProvider;
+import jy.study.place.domain.entity.Place;
+import jy.study.place.domain.service.SearchPlaces;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -14,17 +14,18 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class SearchPlacesNaver implements SearchPlacesProvider {
+public class SearchPlacesNaver implements SearchPlaces {
 
     private final HttpClient httpClient;
 
     private final ObjectMapper objectMapper;
 
     @Override
-    public List<? extends SearchPlace> search(String keyword, int size) {
+    public List<Place> search(String keyword, int size) {
         URI uri = UriComponentsBuilder
                 .fromUri(URI.create("https://openapi.naver.com/v1/search/local.json"))
                 .queryParam("query", keyword)
@@ -40,7 +41,18 @@ public class SearchPlacesNaver implements SearchPlacesProvider {
         try {
             HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             SearchPlacesNaverResult result = objectMapper.readValue(response.body(), SearchPlacesNaverResult.class);
-            return result.getItems();
+
+            if(result.getTotal() == 0) {
+                return List.of();
+            } else {
+                return result.getItems().stream()
+                        .map(i -> new Place(
+                                i.getTitle().replaceAll("<[^>]*>", " "),
+                                i.getAddress(),
+                                i.getRoadAddress()))
+                        .collect(Collectors.toList());
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

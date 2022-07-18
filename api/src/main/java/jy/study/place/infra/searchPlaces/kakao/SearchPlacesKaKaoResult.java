@@ -1,6 +1,5 @@
-package jy.study.place.infra.searchPlaces.provider.kakao;
+package jy.study.place.infra.searchPlaces.kakao;
 
-import jy.study.place.infra.searchPlaces.provider.SearchPlace;
 import lombok.Getter;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.List;
 public class SearchPlacesKaKaoResult {
 
     @Getter
-    public static class Document extends SearchPlace {
+    public static class Document{
         //장소 id
         private String id;
         //장소명, 업체명
@@ -37,21 +36,6 @@ public class SearchPlacesKaKaoResult {
         private String x;
         //Y 좌표값, 경위도인 경우 latitude(위도)
         private String y;
-
-        @Override
-        public String getName() {
-            return place_name;
-        }
-
-        @Override
-        public String address() {
-            return address_name;
-        }
-
-        @Override
-        public String roadAddress() {
-            return road_address_name;
-        }
     }
 
     @Getter

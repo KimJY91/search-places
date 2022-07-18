@@ -1,16 +1,17 @@
-package jy.study.place.infra.searchPlaces.provider.naver;
+package jy.study.place.infra.searchPlaces.naver;
 
-import jy.study.place.infra.searchPlaces.provider.SearchPlace;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * https://developers.naver.com/docs/serviceapi/search/local/local.md#%EC%A7%80%EC%97%AD 참고
+ */
 @Getter
 public class SearchPlacesNaverResult {
 
     @Getter
-    public static class Item extends SearchPlace {
+    public static class Item {
         //검색 결과 업체, 기관명
         private String title;
         //검색 결과 업체, 기관의 상세 정보가 제공되는 네이버 페이지의 하이퍼텍스트 link
@@ -29,21 +30,6 @@ public class SearchPlacesNaverResult {
         private String mapx;
         //검색 결과 업체, 기관명 위치 정보의 y좌표
         private String mapy;
-
-        @Override
-        public String getName() {
-            return title;
-        }
-
-        @Override
-        public String address() {
-            return address;
-        }
-
-        @Override
-        public String roadAddress() {
-            return roadAddress;
-        }
     }
 
     //검색 결과 문서의 총 개수

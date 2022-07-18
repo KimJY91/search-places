@@ -1,6 +1,7 @@
 package jy.study.place.application.impl;
 
 import jy.study.place.application.PlaceSearchService;
+import jy.study.place.domain.entity.Place;
 import jy.study.place.domain.service.KeywordCountPlus;
 import jy.study.place.domain.service.SearchPlaces;
 import jy.study.place.dto.PlaceDto;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +27,7 @@ public class PlaceSearchServiceImpl implements PlaceSearchService {
     @Override
     public List<PlaceDto> search(String keyword) {
         keywordCountPlus.plusCount(keyword);
-        return searchPlaces.search(keyword);
+        List<Place> places = searchPlaces.search(keyword, 10);
+        return places.stream().map(PlaceDto::new).collect(Collectors.toList());
     }
 }
