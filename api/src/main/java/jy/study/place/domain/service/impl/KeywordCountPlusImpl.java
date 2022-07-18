@@ -1,6 +1,5 @@
 package jy.study.place.domain.service.impl;
 
-import jy.study.place.domain.entity.PlaceSearchKeyword;
 import jy.study.place.domain.service.KeywordCountPlus;
 import jy.study.place.infra.repository.PlaceSearchKeywordRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +22,7 @@ public class KeywordCountPlusImpl implements KeywordCountPlus {
 
         if (updatedRowCount == 0) {
             try {
-                placeSearchKeywordRepository.save(new PlaceSearchKeyword(keyword));
+                placeSearchKeywordRepository.init(keyword);
             } catch (DataIntegrityViolationException ignored) {}
 
             placeSearchKeywordRepository.plusCount(keyword);

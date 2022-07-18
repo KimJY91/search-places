@@ -15,8 +15,8 @@ import java.util.concurrent.Executors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
 @Transactional
+@SpringBootTest
 class KeywordCountPlusImplTest {
 
     @Autowired
@@ -29,7 +29,7 @@ class KeywordCountPlusImplTest {
     @DisplayName("카운트 증가 - 데이터 등록되어 있음")
     void plusCount() {
         //given
-        String keyword = "테스트";
+        String keyword = "테스트1";
         entityManager.persist(new PlaceSearchKeyword(keyword, 10));
         entityManager.flush();
         entityManager.clear();
@@ -48,7 +48,7 @@ class KeywordCountPlusImplTest {
     @DisplayName("카운트 증가 - 데이터 등록되지 않음")
     void emptyDataPlusCount() {
         //given
-        String keyword = "테스트";
+        String keyword = "테스트2";
 
         //when
         keywordCountPlus.plusCount(keyword);
@@ -65,10 +65,10 @@ class KeywordCountPlusImplTest {
     @DisplayName("다중 스레드로 카운트 증가")
     void multiThread() throws InterruptedException {
         //given
-        int numberOfThreads = 1000;
+        String keyword = "다중스레드 테스트";
+        int numberOfThreads = 10000;
         ExecutorService service = Executors.newFixedThreadPool(10);
         CountDownLatch latch = new CountDownLatch(numberOfThreads);
-        String keyword = "다중스레드 테스트";
 
         //when
         for (int i = 0; i < numberOfThreads; i++) {

@@ -16,5 +16,10 @@ public interface PlaceSearchKeywordRepository extends JpaRepository<PlaceSearchK
     @Query(value = "update PlaceSearchKeyword psk set psk.count = psk.count + 1 where psk.keyword = :keyword")
     int plusCount(@Param("keyword") String keyword);
 
+    @Transactional
+    @Modifying
+    @Query(value = "insert into place_search_keyword (keyword, count) values (:keyword, 0)", nativeQuery = true)
+    void init(@Param("keyword") String keyword);
+
     List<PlaceSearchKeyword> findTop10ByOrderByCountDesc();
 }

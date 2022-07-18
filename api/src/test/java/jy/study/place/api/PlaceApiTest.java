@@ -59,7 +59,7 @@ class PlaceApiTest {
             entityManager.persist(new PlaceSearchKeyword("테스트"+i, i));
 
         //when & then
-        mockMvc.perform(get("/keywords/count-top-10"))
+        mockMvc.perform(get("/places/keywords/count-top-10"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("data.*.keyword").isNotEmpty())
