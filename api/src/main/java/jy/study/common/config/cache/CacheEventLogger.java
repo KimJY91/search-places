@@ -1,4 +1,4 @@
-package jy.study.common.config;
+package jy.study.common.config.cache;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ehcache.event.CacheEvent;

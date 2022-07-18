@@ -3,16 +3,15 @@ package jy.study.place.infra.searchPlaces.naver;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jy.study.place.domain.entity.Place;
 import jy.study.place.domain.service.SearchPlaces;
+import jy.study.place.exception.SearchPlaceFailException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,12 +52,8 @@ public class SearchPlacesNaver implements SearchPlaces {
                         .collect(Collectors.toList());
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new SearchPlaceFailException(e);
         }
-
-        return new ArrayList<>(0);
     }
 }

@@ -12,7 +12,7 @@
 
         <listeners>
             <listener>
-                <class>jy.study.common.config.CacheEventLogger</class>
+                <class>jy.study.common.config.cache.CacheEventLogger</class>
                 <event-firing-mode>ASYNCHRONOUS</event-firing-mode>
                 <event-ordering-mode>UNORDERED</event-ordering-mode>
                 <events-to-fire-on>CREATED</events-to-fire-on>

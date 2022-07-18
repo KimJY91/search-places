@@ -3,6 +3,7 @@ package jy.study.place.infra.searchPlaces.kakao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jy.study.place.domain.entity.Place;
 import jy.study.place.domain.service.SearchPlaces;
+import jy.study.place.exception.SearchPlaceFailException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -38,23 +39,23 @@ public class SearchPlacesKakao implements SearchPlaces {
                 .build();
 
         try {
+
+
             HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             SearchPlacesKaKaoResult result = objectMapper.readValue(response.body(), SearchPlacesKaKaoResult.class);
 
-            if (result.getMeta().getTotal_count() == 0) {
-                return List.of();
-            } else {
-                return result.getDocuments().stream()
-                        .map(d -> new Place(d.getPlace_name(), d.getAddress_name(), d.getRoad_address_name()))
-                        .collect(Collectors.toList());
-            }
+            throw new Exception();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+//            if (result.getMeta().getTotal_count() == 0) {
+//                return List.of();
+//            } else {
+//                return result.getDocuments().stream()
+//                        .map(d -> new Place(d.getPlace_name(), d.getAddress_name(), d.getRoad_address_name()))
+//                        .collect(Collectors.toList());
+//            }
+
+        } catch (Exception e) {
+            throw new SearchPlaceFailException(e);
         }
-
-        return new ArrayList<>(0);
     }
 }
