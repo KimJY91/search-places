@@ -1,8 +1,9 @@
-package jy.study.place.infra.searchPlaces.combination.kakaoAndNaver;
+package jy.study.place.infra.searchPlaces.combination;
 
 import jy.study.place.domain.entity.Place;
 import jy.study.place.domain.service.SearchPlaces;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -18,6 +19,7 @@ public class SearchPlacesKakaoAndNaver implements SearchPlaces {
 
     private final SearchPlaces searchPlacesNaver;
 
+    @Cacheable("searchPlaces")
     @Override
     public List<Place> search(String keyword, int size) {
         List<Place> placesFromKakao = searchPlacesKakao.search(keyword, size);

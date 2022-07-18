@@ -1,4 +1,4 @@
-package jy.study.place.infra.searchPlaces.combination.kakaoAndNaver;
+package jy.study.place.infra.searchPlaces.combination;
 
 import jy.study.place.domain.entity.Place;
 import jy.study.place.domain.service.SearchPlaces;
