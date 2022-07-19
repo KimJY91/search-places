@@ -1,0 +1,7 @@
+### 장소 조회 api
+GET http://localhost:8000/places?keyword=서울
+Accept: application/json
+
+### 키워드 조회 api
+GET http://localhost:8000/places/keywords/count-top-10
+Accept: application/json
