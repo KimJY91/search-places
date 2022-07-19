@@ -29,14 +29,22 @@ public class Place implements Serializable {
             return true;
 
         if (name.equals(place.name)) {
-            return StringUtils.getLevenshteinDistance(address, place.address) < 10 ||
-                    StringUtils.getLevenshteinDistance(roadAddress, place.roadAddress) < 10;
+            if (StringUtils.isNotEmpty(address) && StringUtils.isNotEmpty(place.address))
+                return StringUtils.getLevenshteinDistance(address, place.address) < 10;
+            else if (StringUtils.isNotEmpty(roadAddress) && StringUtils.isNotEmpty(place.roadAddress))
+                return StringUtils.getLevenshteinDistance(roadAddress, place.roadAddress) < 10;
         }
 
         return false;
     }
 
     private boolean equalsAddress(Place place) {
-        return address.equals(place.address) || roadAddress.equals(place.roadAddress);
+        if (StringUtils.isNotEmpty(address) && StringUtils.isNotEmpty(place.address))
+            return address.equals(place.address);
+        else if (StringUtils.isNotEmpty(roadAddress) && StringUtils.isNotEmpty(place.roadAddress))
+            return roadAddress.equals(place.roadAddress);
+
+        return false;
     }
+
 }
