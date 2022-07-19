@@ -1,5 +1,6 @@
 package jy.study.place.infra.searchPlaces.provider.naver;
 
+import jy.study.place.infra.searchPlaces.provider.SearchPlacesProviderResult;
 import lombok.Getter;
 
 import java.util.List;
@@ -8,10 +9,10 @@ import java.util.List;
  * https://developers.naver.com/docs/serviceapi/search/local/local.md#%EC%A7%80%EC%97%AD 참고
  */
 @Getter
-public class SearchPlacesNaverResult {
+public class SearchPlacesNaverResult implements SearchPlacesProviderResult {
 
     @Getter
-    public static class Item {
+    public static class Document implements SearchPlacesProviderResult.Item {
         //검색 결과 업체, 기관명
         private String title;
         //검색 결과 업체, 기관의 상세 정보가 제공되는 네이버 페이지의 하이퍼텍스트 link
@@ -30,6 +31,11 @@ public class SearchPlacesNaverResult {
         private String mapx;
         //검색 결과 업체, 기관명 위치 정보의 y좌표
         private String mapy;
+
+        @Override
+        public String getName() {
+            return title;
+        }
     }
 
     //검색 결과 문서의 총 개수
@@ -41,5 +47,11 @@ public class SearchPlacesNaverResult {
     //검색된 검색 결과의 개수
     private int display;
 
-    private List<Item> items;
+    private List<Document> items;
+
+    @Override
+    public long getTotalCount() {
+        return 0;
+    }
+
 }
