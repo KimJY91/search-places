@@ -15,7 +15,7 @@ public class BeanConfig {
         return HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_1_1)
                 .connectTimeout(Duration.ofSeconds(20))
-                .executor(Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 3))
+                .executor(Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2))
                 .build();
     }
 

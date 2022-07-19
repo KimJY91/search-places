@@ -1,16 +1,23 @@
 package jy.study.place.domain.service.impl;
 
 import jy.study.place.domain.entity.PlaceSearchKeyword;
+import jy.study.place.domain.service.KeywordCountPlus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.core.task.SyncTaskExecutor;
+import org.springframework.scheduling.annotation.AsyncConfigurer;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -22,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class KeywordCountPlusImplTest {
 
     @Autowired
-    KeywordCountPlusImpl keywordCountPlus;
+    KeywordCountPlus keywordCountPlus;
 
     @PersistenceContext
     EntityManager entityManager;
