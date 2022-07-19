@@ -1,6 +1,7 @@
-package jy.study.place.infra.searchPlaces.naver;
+package jy.study.place.infra.searchPlaces.provider.naver;
 
 import jy.study.place.domain.entity.Place;
+import jy.study.place.infra.searchPlaces.provider.naver.SearchPlacesNaver;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

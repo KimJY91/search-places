@@ -1,4 +1,4 @@
-package jy.study.place.infra.searchPlaces.naver;
+package jy.study.place.infra.searchPlaces.provider.naver;
 
 import lombok.Getter;
 

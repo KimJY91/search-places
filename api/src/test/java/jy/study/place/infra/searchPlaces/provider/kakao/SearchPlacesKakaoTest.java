@@ -1,7 +1,7 @@
-package jy.study.place.infra.searchPlaces.kakao;
+package jy.study.place.infra.searchPlaces.provider.kakao;
 
 import jy.study.place.domain.entity.Place;
-import jy.study.place.infra.searchPlaces.kakao.SearchPlacesKakao;
+import jy.study.place.infra.searchPlaces.provider.kakao.SearchPlacesKakao;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

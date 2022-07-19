@@ -1,48 +1,36 @@
-package jy.study.place.infra.searchPlaces.kakao;
+package jy.study.place.infra.searchPlaces.provider.kakao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jy.study.place.domain.entity.Place;
 import jy.study.place.domain.service.SearchPlaces;
 import jy.study.place.exception.SearchPlaceFailException;
+import jy.study.place.infra.searchPlaces.provider.SearchPlacesProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
-@RequiredArgsConstructor
-public class SearchPlacesKakao implements SearchPlaces {
+public class SearchPlacesKakao extends SearchPlacesProvider implements SearchPlaces {
 
-    private final HttpClient httpClient;
-
-    private final ObjectMapper objectMapper;
+    public SearchPlacesKakao(HttpClient httpClient, ObjectMapper objectMapper) {
+        super(httpClient, objectMapper, "http://dapi.kakao.com/v2/local/search/keyword.JSON",
+                Map.of("Authorization", "KakaoAK 6c9121f4dc84325e197cb093f3d975e3"));
+    }
 
     @Override
     public List<Place> search(String keyword, int size) {
-        URI uri = UriComponentsBuilder
-                .fromUri(URI.create("http://dapi.kakao.com/v2/local/search/keyword.JSON"))
-                .queryParam("query", keyword)
-                .queryParam("size", size)
-                .build().toUri();
-
-        HttpRequest httpRequest = HttpRequest.newBuilder().GET()
-                .header("Authorization", "KakaoAK 6c9121f4dc84325e197cb093f3d975e3")
-                .uri(uri)
-                .build();
+        Map<String, String> params = Map.of("query", keyword, "size", String.valueOf(size));
 
         try {
-
-
-            HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-            SearchPlacesKaKaoResult result = objectMapper.readValue(response.body(), SearchPlacesKaKaoResult.class);
+            SearchPlacesKaKaoResult result = search(params, SearchPlacesKaKaoResult.class);
 
             if (result.getMeta().getTotal_count() == 0) {
                 return List.of();
@@ -52,6 +40,8 @@ public class SearchPlacesKakao implements SearchPlaces {
                         .collect(Collectors.toList());
             }
 
+        } catch (SearchPlaceFailException e) {
+          throw e;
         } catch (Exception e) {
             throw new SearchPlaceFailException(e);
         }

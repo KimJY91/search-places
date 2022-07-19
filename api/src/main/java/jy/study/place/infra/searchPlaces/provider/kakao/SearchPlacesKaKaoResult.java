@@ -1,4 +1,4 @@
-package jy.study.place.infra.searchPlaces.kakao;
+package jy.study.place.infra.searchPlaces.provider.kakao;
 
 import lombok.Getter;
 
