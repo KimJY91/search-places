@@ -6,6 +6,7 @@ import jy.study.place.dto.PlaceSearchKeywordDto;
 import jy.study.place.infra.repository.PlaceSearchKeywordRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +21,7 @@ public class PlaceSearchKeywordServiceImpl implements PlaceSearchKeywordService 
      * 검색횟수 상위 10개 키워드 조회
      * @return 검색 키워드 리스트
      */
+    @Transactional(readOnly = true)
     @Override
     public List<PlaceSearchKeywordDto> getCountTop10Keywords() {
         List<PlaceSearchKeyword> list = placeSearchKeywordRepository.findTop10ByOrderByCountDesc();
