@@ -13,9 +13,8 @@ import java.util.Map;
 @Component
 public class SearchPlacesNaver extends SearchPlacesProvider implements SearchPlaces {
 
-    public SearchPlacesNaver(HttpClient httpClient, ObjectMapper objectMapper) {
-        super(httpClient, objectMapper, "https://openapi.naver.com/v1/search/local.json",
-                Map.of("X-Naver-Client-Id", "wnsJKaKe4a7uzIXacGUy", "X-Naver-Client-Secret", "KOECnMtwKe"));
+    public SearchPlacesNaver(HttpClient httpClient, ObjectMapper objectMapper, NaverConfig naverConfig) {
+        super(httpClient, objectMapper, naverConfig.getUrl(), naverConfig.getHeaders());
     }
 
     @Override

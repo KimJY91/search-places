@@ -31,3 +31,16 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
+
+infra:
+  search:
+    provider:
+      kakao:
+        url: http://dapi.kakao.com/v2/local/search/keyword.JSON
+        headers:
+          Authorization: KakaoAK 6c9121f4dc84325e197cb093f3d975e3
+      naver:
+        url: https://openapi.naver.com/v1/search/local.json
+        headers:
+          X-Naver-Client-Id: wnsJKaKe4a7uzIXacGUy
+          X-Naver-Client-Secret: KOECnMtwKe

@@ -51,7 +51,7 @@ public class SearchPlacesNaverResult implements SearchPlacesProviderResult {
 
     @Override
     public long getTotalCount() {
-        return 0;
+        return total;
     }
 
 }

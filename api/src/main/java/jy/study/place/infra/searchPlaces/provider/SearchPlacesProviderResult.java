@@ -1,7 +1,5 @@
 package jy.study.place.infra.searchPlaces.provider;
 
-import jy.study.place.infra.searchPlaces.provider.kakao.SearchPlacesKaKaoResult;
-
 import java.util.List;
 
 public interface SearchPlacesProviderResult {
