@@ -17,6 +17,10 @@ public class ApiExceptionHandler {
     public ResponseEntity<CommonResponseBody> apiExceptionHandler(ApiException exception) {
         log.error("ApiException ", exception);
 
+        if (exception.getCause() != null) {
+            log.error("ApiException.cause ", exception.getCause());
+        }
+
         CommonResponseBody commonResponseBody = new CommonResponseBody<>(exception.getCode(), exception.getMessage());
         return new ResponseEntity(commonResponseBody, HttpStatus.OK);
     }

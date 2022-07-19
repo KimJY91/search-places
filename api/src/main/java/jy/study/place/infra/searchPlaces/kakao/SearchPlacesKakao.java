@@ -44,15 +44,13 @@ public class SearchPlacesKakao implements SearchPlaces {
             HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             SearchPlacesKaKaoResult result = objectMapper.readValue(response.body(), SearchPlacesKaKaoResult.class);
 
-            throw new Exception();
-
-//            if (result.getMeta().getTotal_count() == 0) {
-//                return List.of();
-//            } else {
-//                return result.getDocuments().stream()
-//                        .map(d -> new Place(d.getPlace_name(), d.getAddress_name(), d.getRoad_address_name()))
-//                        .collect(Collectors.toList());
-//            }
+            if (result.getMeta().getTotal_count() == 0) {
+                return List.of();
+            } else {
+                return result.getDocuments().stream()
+                        .map(d -> new Place(d.getPlace_name(), d.getAddress_name(), d.getRoad_address_name()))
+                        .collect(Collectors.toList());
+            }
 
         } catch (Exception e) {
             throw new SearchPlaceFailException(e);
